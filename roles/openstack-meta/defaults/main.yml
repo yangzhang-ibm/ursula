@@ -54,6 +54,8 @@ openstack_meta:
           name: cinder-api
           desc: OpenStack Cinder API Service
           user: cinder
+          envs:
+            - "REQUESTS_CA_BUNDLE={{ ssl.cafile }}"
           cmd: /usr/local/bin/cinder-api
           config_dirs: /etc/cinder
         rhel:
@@ -61,6 +63,8 @@ openstack_meta:
           desc: OpenStack Cinder API Service
           type: simple
           user: cinder
+          environments:
+            - "REQUESTS_CA_BUNDLE={{ ssl.cafile }}"
           cmd: "{{ (ansible_distribution == 'RedHat') | ternary('/usr/bin/', '/usr/local/bin/') }}cinder-api"
           config_files: /etc/cinder/cinder.conf
           restart: on-failure

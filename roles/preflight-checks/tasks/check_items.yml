@@ -84,3 +84,15 @@
   when: v7k.enabled
   tags: ['precheck_v7k']
   run_once: true
+
+- name:  Make sure that if fixed_key is defined then cinder encryption is also enabled
+  assert:
+    that: "cinder.encryption.enabled"
+  when: cinder.encryption.fixed_key
+  run_once: true
+
+- name:  Make sure that if cinder encryption is enabled, then only barbican or fixed_key is used (XOR)
+  assert:
+    that: "barbican.enabled != (cinder.encryption.fixed_key is not none)"
+  when: cinder.encryption.enabled|bool
+  run_once: true

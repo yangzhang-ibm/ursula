@@ -7,10 +7,12 @@
     name: "{{ item.name }}"
     user: "{{ item.user }}"
     cmd: "{{ item.cmd }}"
+    envs: "{{ item.envs|default([]) }}"
     config_dirs: "{{ item.config_dirs }}"
   with_items:
     - "{{ cinder.services.cinder_api }}"
     - "{{ cinder.services.cinder_scheduler }}"
+  notify: restart cinder services
   when: ursula_os == 'ubuntu'
 
 - name: install cinder controller services (rhel)
@@ -19,12 +21,14 @@
     description: "{{ item.desc }}"
     type: "{{ item.type }}"
     user: "{{ item.user }}"
+    environments: "{{ item.environments|default([]) }}"
     cmd: "{{ item.cmd }}"
     config_files: "{{ item.config_files }}"
     restart: "{{ item.restart }}"
   with_items:
     - "{{ cinder.services.cinder_api }}"
     - "{{ cinder.services.cinder_scheduler }}"
+  notify: restart cinder services
   when: ursula_os == 'rhel'
 
 - name: sync cinder database
