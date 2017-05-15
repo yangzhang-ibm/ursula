@@ -1,4 +1,9 @@
 ---
+- name: register flavor count
+  shell: . /root/stackrc; openstack flavor list -f value --all
+  register: flavorcount
+  run_once: true
+  
 - name: Add flavors
   environment:
     PYTHONPATH: "{{ basevenv_lib_dir|default(omit) }}"
@@ -21,7 +26,9 @@
       password: "{{ secrets.admin_password  }}"
   with_items: '{{ openstack_meta.nova.flavors | default([]) }}'
   run_once: true
-  # FIXME flavors are always added, even if it's just an Ironic cloud
+  when: 
+    - flavorcount.stdout == "" or openstack_meta.nova.force_flavors|bool
+    - not ironic.enabled|bool
 
 - name: Add ironic flavors
   environment:
