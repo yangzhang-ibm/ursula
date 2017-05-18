@@ -417,14 +417,14 @@ IMAGE_RESERVED_CUSTOM_PROPERTIES = []
 # The number of objects (Swift containers/objects or images) to display
 # on a single page before providing a paging element (a "more" link)
 # to paginate results.
-API_RESULT_LIMIT = 1000
-API_RESULT_PAGE_SIZE = 20
+API_RESULT_LIMIT = {{ horizon.api_result_limit }}
+API_RESULT_PAGE_SIZE = {{ horizon.api_result_page_size }}
 
 # The size of chunk in bytes for downloading objects from Swift
 SWIFT_FILE_TRANSFER_CHUNK_SIZE = 512 * 1024
 
 # Specify a maximum number of items to display in a dropdown.
-DROPDOWN_MAX_ITEMS = 30
+DROPDOWN_MAX_ITEMS = {{ horizon.dropdown_max_items }}
 
 # The timezone of the server. This should correspond with the timezone
 # of your entire OpenStack installation, and hopefully be in UTC.
