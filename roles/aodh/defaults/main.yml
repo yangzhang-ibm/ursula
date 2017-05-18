@@ -62,4 +62,5 @@ aodh:
   alarm_history_time_to_live: 864000
   monitoring:
     sensu_checks:
-      check_aodh_api: criticality
+      check_aodh_api:
+        criticality: critical
