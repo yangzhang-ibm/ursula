@@ -10,7 +10,7 @@
   shell: uuidgen > /etc/ceph/fsid && truncate -s -1 /etc/ceph/fsid
          creates=/etc/ceph/fsid
   run_once: true
-  delegate_to:  "{{ groups['ceph_monitors'][0] }}"
+  delegate_to: "{{ groups['ceph_monitors'][0] }}"
 
 - name: fetch contents of fsid file
   slurp: path=/etc/ceph/fsid
@@ -30,7 +30,7 @@
   shell: uuidgen > /etc/ceph/cinder_uuid && truncate -s -1 /etc/ceph/cinder_uuid
          creates=/etc/ceph/cinder_uuid
   run_once: true
-  delegate_to:  "{{ groups['ceph_monitors'][0] }}"
+  delegate_to: "{{ groups['ceph_monitors'][0] }}"
 
 - name: fetch contents of uuid file
   slurp: path=/etc/ceph/cinder_uuid
