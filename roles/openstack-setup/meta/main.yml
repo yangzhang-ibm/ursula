@@ -1,4 +1,5 @@
 ---
 dependencies:
   - role: endpoints
+  - role: openstack-meta
   - role: v7k-defaults
