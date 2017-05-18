@@ -60,6 +60,15 @@
   retries: 5
   when: openstack_install_method != 'distro'
 
+- name: install openstack clients (basevenv)
+  pip: name={{ item }} virtualenv="{{ basevenv | default('/opt/openstack/base') }}"
+  with_items: "{{ client.names['pip_pkgs'] }}"
+  notify:
+    - update ca certs
+  register: result
+  until: result|succeeded
+  retries: 5
+
 - name: fix ssl certs for requests for keystone-client on trusty
   file: src=/etc/ssl/certs/ca-certificates.crt
         dest=/usr/local/lib/python2.7/dist-packages/requests/cacert.pem
