@@ -111,6 +111,7 @@ openstack_meta:
           config_files: /etc/cinder/cinder.conf
           restart: on-failure
   nova:
+    force_flavors: false
     flavors:
       - flavorid: 1
         name: m1.tiny
