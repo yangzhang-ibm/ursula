@@ -154,8 +154,8 @@ apt_repos:
     repo: https://apt-mirror.openstack.blueboxgrid.com/mongodb/apt/ubuntu
     key_url: https://apt-mirror.openstack.blueboxgrid.com/keys/mongodb.key
   elastic:
-    repo: https://apt-mirror.openstack.blueboxgrid.com/filebeat
-    key_url: https://apt-mirror.openstack.blueboxgrid.com/keys/filebeat.key
+    repo: https://apt-mirror.openstack.blueboxgrid.com/elastic_5_x
+    key_url: https://apt-mirror.openstack.blueboxgrid.com/keys/elastic_5_x.key
   chef:
     repo: https://apt-mirror.openstack.blueboxgrid.com/chef
     key_url: https://apt-mirror.openstack.blueboxgrid.com/keys/chef.key
