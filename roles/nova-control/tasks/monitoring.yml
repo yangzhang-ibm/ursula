@@ -19,6 +19,13 @@
   sensu_process_check: service=nova-api warn_over=20 crit_over=30
   notify: restart sensu-client
 
+- name: nova-placement-api process check
+  sensu_check:
+    name: nova_placement_process
+    plugin: check-procs.rb
+    args: "-p 'uwsgi.*placement' -w 5 -c 10 -W 1 -C1"
+  notify: restart sensu-client
+
 - name: nova-api check
   sensu_check: name=check-nova-api plugin=check-os-api.rb
                args="--service nova --criticality {{ nova.monitoring.sensu_checks.check_nova_api.criticality }}"
