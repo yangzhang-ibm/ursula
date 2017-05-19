@@ -60,7 +60,7 @@ haproxy:
 
 keystone:
   uwsgi:
-    method: port
+    method: socket
 
 nova:
   libvirt_type: kvm

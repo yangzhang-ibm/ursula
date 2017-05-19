@@ -50,7 +50,7 @@ keystone:
     enabled: True
     domain: users
   uwsgi:
-    method: port
+    method: socket
 
 barbican:
   enabled: True

@@ -16,7 +16,7 @@ etc_hosts:
 
 keystone:
   uwsgi:
-    method: port
+    method: socket
 
 barbican:
   enabled: True
