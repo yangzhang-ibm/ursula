@@ -4,6 +4,20 @@
     that: "ssl.cafile is defined"
     msg: "ssl.cafile must be defined based on the operating system {{ ursula_os }}"
 
+# cinder v1 / nova placement port collision check
+- name: check whether cinder is listening on port 8778
+  shell: lsof -Pni:8778 -sTCP:LISTEN | grep -q cinder
+  register: result_cinder_port
+  failed_when: false
+  changed_when: false
+
+- name: fail when cinder is listening on 8778
+  fail:
+    msg: |
+      The port for the cinder-api backend must change as it collides with
+      the placement API. Stop the cinder-api service before continuing.
+  when: result_cinder_port.rc == 0
+
 - block:
   - name: check whether neutron-client is installed
     command: neutron --version
