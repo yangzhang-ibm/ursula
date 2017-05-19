@@ -27,10 +27,14 @@ nova:
       config_file: libvirtd.conf
       defaults: /etc/default/libvirt
       group: libvirtd
+      qemu_user: libvirt-qemu
+      qemu_group: libvirtd
     rhel:
       config_file: libvirt.conf
       defaults: /etc/sysconfig/libvirtd
       group: libvirt
+      qemu_user: qemu
+      qemu_group: qemu
   enable_fatal_deprecations: True
   patches:
   compute_driver: libvirt.LibvirtDriver

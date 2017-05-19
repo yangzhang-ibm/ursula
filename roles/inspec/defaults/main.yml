@@ -274,6 +274,10 @@ inspec:
     kvm:
       enabled: true
       profile: ursula-inspec
+      attributes:
+        libvirt_sock_group: "{{ (ursula_os == 'rhel' )| ternary('libvirt', 'libvirtd') }}"
+        qemu_user: "{{ (ursula_os == 'rhel' )| ternary('qemu', 'libvirt-qemu') }}"
+        qemu_group: "{{ (ursula_os == 'rhel' )| ternary('qemu', 'libvirtd') }}"
       required_controls:
         - KVM001
         - KVM003
