@@ -29,7 +29,7 @@ ff02::2 ip6-allrouters
 
 {% if 'compute' in groups %}
 {% for host in groups['compute'] if inventory_hostname in groups['compute'] %}
-{{ hostvars[host].ansible_default_ipv4.address }} {{ hostvars[host].ansible_nodename }}
+{{ hostvars[host].ansible_default_ipv4.address }} {{ hostvars[host].hostname_fqdn }} {{ hostvars[host].hostname_short }}
 {% endfor %}
 {% endif %}
 
