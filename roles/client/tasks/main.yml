@@ -12,16 +12,6 @@
   until: result|succeeded
   retries: 5
 
-- name: install required packages for clients
-  package:
-    name: "{{ item }}"
-    state: present
-  with_items: "{{ client.names['yum_pkgs'] }}"
-  register: result
-  until: result|succeeded
-  retries: 5
-  when: ursula_os == 'rhel' and openstack_install_method == 'distro'
-
 - block:
   - name: make sure /opt/stack/ exists
     file: dest=/opt/stack state=directory
@@ -31,14 +21,16 @@
       src: ../../openstack-source/files/constraints.txt
       dest: /opt/stack/constraints.txt
       force: true
-    when: client.upper_constraints == None
+    when: client.upper_constraints == None or client.upper_constraints == ""
 
   - name: get constraints file
     get_url:
       url: "{{ client.upper_constraints }}"
       dest: /opt/stack/constraints.txt
       force: true
-    when: client.upper_constraints != None
+    when:
+      - client.upper_constraints != None
+      - client.upper_constraints != ""
 
   - name: upgrade system setuptools using upper_contraints
     pip:
@@ -47,18 +39,38 @@
     register: result
     until: result|succeeded
     retries: 5
+
+  - name: install openstack clients (not distro using upper_contraints)
+    pip: name={{ item }} extra_args='-c /opt/stack/constraints.txt'
+    with_items: "{{ client.names['pip_pkgs'] }}"
+    when: client.use_constraints|bool
+    notify:
+      - update ca certs
+    register: result
+    until: result|succeeded
+    retries: 5
+
+  - name: install python-openstackclient (not distro without using upper_contraints)
+    pip: name={{ item }}
+    with_items: "{{ client.names['pip_pkgs'] }}"
+    when: not client.use_constraints|bool
+    notify:
+      - update ca certs
+    register: result
+    until: result|succeeded
+    retries: 5
   when:
     - openstack_install_method != 'distro'
 
-- name: install openstack clients
-  pip: name={{ item }} extra_args='-c /opt/stack/constraints.txt'
-  with_items: "{{ client.names['pip_pkgs'] }}"
-  notify:
-    - update ca certs
+- name: install openstack clients (distro)
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ client.names['yum_pkgs'] }}"
   register: result
   until: result|succeeded
   retries: 5
-  when: openstack_install_method != 'distro'
+  when: ursula_os == 'rhel' and openstack_install_method == 'distro'
 
 - name: install openstack clients (basevenv)
   pip: name={{ item }} virtualenv="{{ basevenv | default('/opt/openstack/base') }}"

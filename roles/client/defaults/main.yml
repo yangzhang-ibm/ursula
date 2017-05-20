@@ -1,6 +1,7 @@
 ---
 client:
-  upper_constraints: '{{ openstack_meta.upper_constraints }}'
+  upper_constraints: "{{ openstack_meta.upper_constraints }}"
+  use_constraints: False
   write_stackrc: True
   self_signed_cert: false
   dep_pkgs:
@@ -9,7 +10,7 @@ client:
     pip_pkgs:
       - python-keystoneclient
       - python-glanceclient
-      - python-novaclient<8.0.0
+      - python-novaclient
       - python-neutronclient
       - python-cinderclient
       - python-heatclient
