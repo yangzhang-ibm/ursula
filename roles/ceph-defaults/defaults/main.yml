@@ -120,7 +120,7 @@ ceph:
 
   # Monitor options
   monitor_interface: bond0
-  mon_osd_down_out_interval: 600
+  mon_osd_down_out_interval: 1200
   mon_clock_drift_allowed: .15
   mon_clock_drift_warn_backoff: 30
   mon_osd_full_ratio: .95
