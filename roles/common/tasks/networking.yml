@@ -14,10 +14,8 @@
     set_fact:
       network_dir_path: /etc/sysconfig/network-scripts
     when: ursula_os == 'rhel'
-  tags: ['prereboot']
 
-- block:
-  - name: network interfaces file
+  - name: network interfaces file - ubuntu
     copy:
       content: "{{ network_interfaces }}"
       dest: /etc/network/interfaces
@@ -27,7 +25,10 @@
       mode: 0644
     when:
       - ursula_os == 'ubuntu'
+      - network_interfaces is defined
+  tags: ['prereboot']
 
+- block:
   - name: create interfaces.d directory if multiple interface files
     file:
       state: directory
@@ -92,15 +93,15 @@
   - name: Check if interface has its own config file
     stat: path=/etc/network/interfaces.d/{{ ansible_default_ipv4.interface }}.cfg
     register: found_in_interfaces_d
- 
+
   - name: Set network config file
     set_fact: nw_config_file=/etc/network/interfaces.d/{{ ansible_default_ipv4.interface }}.cfg
     when: found_in_interfaces_d.stat.exists is defined and found_in_interfaces_d.stat.exists
- 
+
   - name: Set network config file
     set_fact: nw_config_file="/etc/network/interfaces"
     when: not found_in_interfaces_d.stat.exists|bool
- 
+
   #Check if the static routes are present in interface configuration file, so that they are persistant across reboots.
   - name: Check for static routes in {{ nw_config_file }}
     command: "grep -h 'ip route add {{ item.cidr }} via {{ nw_gw }}' {{ nw_config_file }}"
