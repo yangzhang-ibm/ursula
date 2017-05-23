@@ -23,7 +23,7 @@
   sensu_check:
     name: nova_placement_process
     plugin: check-procs.rb
-    args: "-p 'uwsgi.*placement' -w 5 -c 10 -W 1 -C1"
+    args: "-p 'uwsgi.*placement' -w 5 -c 10 -W 1 -C 1"
   notify: restart sensu-client
 
 - name: nova-api check
