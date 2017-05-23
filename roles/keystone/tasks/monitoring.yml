@@ -11,7 +11,7 @@
   sensu_check:
     name: keystone_process
     plugin: check-procs.rb
-    args: "-p 'uwsgi.*keystone' -w 10 -c 15 -W 1 -C1"
+    args: "-p 'uwsgi.*keystone' -w 15 -c 30 -W 1 -C 1"
   notify: restart sensu-client
 
 - name: shibboleth process check
