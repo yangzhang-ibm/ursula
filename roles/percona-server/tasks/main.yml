@@ -139,6 +139,16 @@
       regexp: '^innodb_locks_unsafe_for_binlog\s*='
       line: "innodb_locks_unsafe_for_binlog = 1"
 
+- name: make sure /var/run/mysqld has the correct ownership and permissions
+  file:
+    dest: /var/run/mysqld
+    mode: 0755
+    owner: mysql
+    group: mysql
+  notify:
+    - restart mysql server
+
+
 - meta: flush_handlers
 
 - name: check on rhel if bootstrap service is running

@@ -104,13 +104,12 @@
     value: '{{ item.value }}'
   with_items:
     - option: 'unix_sock_group'
-      value: '"libvirt"'
+      value: '"{{ nova.libvirt[ursula_os].group }}"'
     - option: 'unix_sock_ro_perms'
       value: '"0770"'
     - option: 'unix_sock_rw_perms'
       value: '"0770"'
   notify: restart libvirt-bin
-  when: ursula_os == 'rhel'
 
 - name: remove libvirtd defaults
   lineinfile:
@@ -135,11 +134,10 @@
     value: '{{ item.value }}'
   with_items:
     - option: 'user'
-      value: '"qemu"'
+      value: '"{{ nova.libvirt[ursula_os].qemu_user }}"'
     - option: 'group'
-      value: '"qemu"'
+      value: '"{{ nova.libvirt[ursula_os].qemu_group }}"'
   notify: restart libvirt-bin
-  when: ursula_os == 'rhel'
 
 - name: ensure kvm is supported by cpu and enabled in bios (ubuntu)
   command: kvm-ok
