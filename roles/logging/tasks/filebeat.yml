@@ -1,4 +1,7 @@
 ---
+- name: uninstall logstash-forwarder
+  package: name=logstash-forwarder state=absent
+
 - name: install filebeat apt
   apt:
     pkg: "filebeat"
