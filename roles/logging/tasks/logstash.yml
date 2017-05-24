@@ -1,4 +1,7 @@
 ---
+- name: uninstall filebeat
+  package: name=filebeat state=absent
+
 - name: configure rsyslog
   template: src={{ item }} dest=/etc/rsyslog.d mode=0644
   with_fileglob: ../templates/etc/rsyslog.d/*
