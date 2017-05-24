@@ -248,6 +248,7 @@
       run_once: True
       tags: dbdump
       delegate_to: "{{ groups['db'][0] }}"
+      when: ceilometer.enabled|bool
 
   roles:
     - role: aodh
@@ -255,6 +256,7 @@
       restart: False
       database_create:
         changed: false
+      when: ceilometer.enabled|bool
   environment: "{{ env_vars|default({}) }}"
 
 - name: stage ceilometer data software
