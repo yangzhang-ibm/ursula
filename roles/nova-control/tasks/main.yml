@@ -47,6 +47,15 @@
     with_items:
       - "{{ nova.services.nova_cert }}"
 
+  - name: get nova-cert service ids
+    shell: . /root/stackrc; nova service-list --binary nova-cert | grep nova-cert | awk '{print $2}'
+    register: nova_cert_srvc_ids
+    failed_when: false
+
+  - name: remove retired nova-cert from nova service
+    shell: . /root/stackrc; nova service-delete {{ item }}
+    with_items: "{{ nova_cert_srvc_ids.stdout_lines }}"
+
   - name: install nova controller services (ubuntu)
     upstart_service:
       name: "{{ item.name }}"
