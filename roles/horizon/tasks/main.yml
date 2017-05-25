@@ -182,6 +182,14 @@
       - "{{ horizon.horizon_lib_dir }}/bin/django-admin.py collectstatic --noinput"
       - "{{ horizon.horizon_lib_dir }}/bin/django-admin.py compress --force"
 
+  - name: compile localized messages for horizon
+    environment:
+      DJANGO_SETTINGS_MODULE: 'openstack_dashboard.settings'
+      PYTHONPATH: "$PYTHONPATH"
+    shell: "{{ horizon.horizon_lib_dir }}/bin/django-admin.py compilemessages"
+    args:
+      chdir: "{{ horizon.horizon_lib_dir }}/lib/python2.7/site-packages"
+
   when: openstack_install_method != 'distro'
 
 # Use custom policy to allow cloud_admin admin panel access
