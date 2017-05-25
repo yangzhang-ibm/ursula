@@ -33,9 +33,11 @@ horizon:
     system_dependencies:
       ubuntu:
         - apache2
+        - gettext
         - libapache2-mod-wsgi
       rhel:
         - httpd
+        - gettext
         - mod_wsgi
         - mod_proxy_uwsgi
   logs:
