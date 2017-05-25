@@ -6,6 +6,16 @@
     ntpd_service_name: ntpd
   when: ursula_os == 'rhel'
 
+- name: install ntp package (rhel)
+  yum:
+    pkg: ntp
+  when: ursula_os == 'rhel'
+
+- name: install ntp package (ubuntu)
+  apt:
+    pkg: ntp
+  when: ursula_os == 'ubuntu'
+
 - name: install ntp.conf
   template:
     dest: /etc/ntp.conf

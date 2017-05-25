@@ -10,7 +10,9 @@ common:
     serial_console: ttyS1
     state: probe
     baud_rate: 115200
-  ntpd:
+  ntp:
+  # client: ntpd
+    client: chrony
     servers:
        - 0.north-america.pool.ntp.org
        - 1.north-america.pool.ntp.org
@@ -64,7 +66,6 @@ common:
         - lvm2
         - mtr
         - netcat
-        - ntp
         - pciutils
         - pv
         - resolvconf
@@ -96,7 +97,6 @@ common:
         - mlocate
         - mtr
         - net-tools
-        - ntp
         - nc
         - traceroute
         - tcpdump
