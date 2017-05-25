@@ -5,12 +5,11 @@ DOCUMENTATION = """
 ---
 author: Michael Sambol
 module: ceph_pool
-short_description: Creates ceph pool and ensures correct pg count
+short_description: Creates ceph pool
 description:
   There are three possible outcomes:
     1/ Create a new pool if it doesn't exist
-    2/ Set the pool's pg count to correct number
-    3/ Nothing: pool is created and pg count is correct
+    2/ Nothing: pool already exist
 options:
   pool_name:
     description:
@@ -18,8 +17,20 @@ options:
     required: true
   osds:
     description:
-      - The osds count: pg count is calculated based on this
+      - The osds count: pg count is calculated based on osd number
     required: true
+  target_pgs_per_osd:
+    description:
+      - The desired PG numbers per OSD
+    required: true
+  max_pgs_per_osd:
+    description:
+      - The max PG numbers per OSD which should never be exceeded.
+    required: true
+  pool_size:
+    description:
+      - Copies of PGs
+    default: 3
 """
 
 EXAMPLES = """
@@ -28,6 +39,9 @@ EXAMPLES = """
 - ceph_pool:
     pool_name: default
     osds: "{{ groups['ceph_osds_ssd']|length * ceph.disks|length }}"
+    target_pgs_per_osd: "{{ ceph.target_pgs_per_osd }}"
+    max_pgs_per_osd: "{{ ceph.max_pgs_per_osd }}"
+    pool_size: "{{ ceph.pool_default_size }}"
   register: pool_output
   run_once: true
   delegate_to: "{{ groups['ceph_monitors'][0] }}"
@@ -40,25 +54,28 @@ def main():
         argument_spec=dict(
             pool_name=dict(required=True),
             osds=dict(required=True, type='int'),
+            target_pgs_per_osd=dict(required=True, type='int'),
+            max_pgs_per_osd=dict(required=True, type='int'),
+            pool_size=dict(default=3, type='int'),
         ),
     )
 
     pool_name = module.params.get('pool_name')
     osds = module.params.get('osds')
+    target_pgs_per_osd = module.params.get('target_pgs_per_osd')
+    max_pgs_per_osd = module.params.get('max_pgs_per_osd')
+    pool_size = module.params.get('pool_size')
 
     # calculate desired pg count
-    # 100 is a constant and 3 is the number of copies
     # read more about pg count here: http://ceph.com/pgcalc/
-    total_pg_count = (osds * 100) / 3
+    total_pg_count = osds * target_pgs_per_osd / pool_size
     i = 0
     desired_pg_count = 0
+    # find the number which is power of 2 and larger than total_pg_count
     while desired_pg_count < total_pg_count:
         desired_pg_count = 2**i
         i += 1
-
-    # if desired_pg_count is > 32 pgs/osd, ceph throws a warning
-    # common protocol is to divide by 2
-    while desired_pg_count / osds > 32:
+    while desired_pg_count * pool_size / osds > max_pgs_per_osd:
         desired_pg_count = desired_pg_count / 2
 
     # does the pool exist already?

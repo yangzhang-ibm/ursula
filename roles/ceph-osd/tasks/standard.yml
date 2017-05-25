@@ -48,6 +48,9 @@
   ceph_pool:
     pool_name: "{{ ssd_pool }}"
     osds: "{{ groups['ceph_osds_ssd']|length * ceph.disks|length }}"
+    target_pgs_per_osd: "{{ ceph.target_pgs_per_osd }}"
+    max_pgs_per_osd: "{{ ceph.max_pgs_per_osd }}"
+    pool_size: "{{ ceph.pool_default_size }}"
   delegate_to: "{{ groups['ceph_monitors'][0] }}"
   when: inventory_hostname == (play_hosts | intersect(groups['ceph_osds_ssd']))[0]
 
