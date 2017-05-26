@@ -73,3 +73,4 @@
 # do with the mix of sysv/upstart service handling. --cmt
 - name: force the start of filebeat
   command: /usr/sbin/update-rc.d filebeat defaults
+  when: ursula_os == "ubuntu"
