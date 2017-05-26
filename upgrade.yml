@@ -183,6 +183,16 @@
       set_fact:
         restart: False
 
+- name: populate ceph related vars
+  hosts: ceph_monitors[0]
+  max_fail_percentage: 1
+  any_errors_fatal: true
+  tasks:
+    - include: roles/ceph-osd/tasks/pool_names.yml
+      when: ceph.enabled
+      tags: ['ceph', 'ceph-osd']
+  environment: "{{ env_vars|default({}) }}"
+
 - name: upgrade glance
   hosts: controller
   max_fail_percentage: 1
@@ -204,16 +214,6 @@
       restart: False
       database_create:
         changed: false
-  environment: "{{ env_vars|default({}) }}"
-
-- name: populate ceph related vars
-  hosts: ceph_monitors[0]
-  max_fail_percentage: 1
-  any_errors_fatal: true
-  tasks:
-    - include: roles/ceph-osd/tasks/pool_names.yml
-      when: ceph.enabled
-      tags: ['ceph', 'ceph-osd']
   environment: "{{ env_vars|default({}) }}"
 
 - include: playbooks/cinder-upgrade.yml
