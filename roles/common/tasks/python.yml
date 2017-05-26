@@ -79,7 +79,7 @@
     virtualenv: "{{ common.python.base_venv }}"
     extra_args: "{{ pip_extra_args }}"
   with_items:
-    - shade>=1.9.0
+    - "{{ common.python.shade_version }}"
   register: result
   until: result|succeeded
   retries: 5
@@ -134,16 +134,3 @@
     register: result
     until: result|succeeded
     retries: 5
-
-  #Given we are using baseven for ansible shade, do we need to install at system level?
-  - name: install shade bits for ansible modules
-    pip:
-      name: "{{ item }}"
-      extra_args: "{{ pip_extra_args }}"
-    with_items:
-      - six>=1.10.0
-      - shade>=1.9.0
-    register: result
-    until: result|succeeded
-    retries: 5
-  when: openstack_install_method != 'distro'
