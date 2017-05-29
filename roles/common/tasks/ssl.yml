@@ -40,8 +40,13 @@
 # ugly hack: some python http libs don't honor the system ca-certs, and ship with
 # their own list, instead.
 # pre-install these client libs, and force them to use the system cert list.
-- name: force our ssl cert for python libs
+- name: force our ssl cert for python libs (requests)
   file: src={{ ssl.cafile }} dest="{{ basevenv_lib_dir }}/requests/cacert.pem"
+        owner=root mode=0644
+        state=link force=yes
+
+- name: force our ssl cert for python libs (certifi)
+  file: src={{ ssl.cafile }} dest="{{ basevenv_lib_dir }}/certifi/cacert.pem"
         owner=root mode=0644
         state=link force=yes
 
