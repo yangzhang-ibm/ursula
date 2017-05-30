@@ -67,3 +67,10 @@
   until: result|success
   retries: 3
   delay: 10
+
+# FIXME: despite "enabled=yes" in previous task, filebeat does not autostart
+# on reboot. Adding this until we root cause the failure above. Likely to 
+# do with the mix of sysv/upstart service handling. --cmt
+- name: force the start of filebeat
+  command: /usr/sbin/update-rc.d filebeat defaults
+  when: ursula_os == "ubuntu"
