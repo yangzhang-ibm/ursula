@@ -86,6 +86,7 @@ sensu_checks:
       occurrences: 1
       interval: 600
       max_routers: 100
+      delay_seconds: 120
       standalone: true
       command: check-neutron-l3-routers.sh
       service_owner: openstack
