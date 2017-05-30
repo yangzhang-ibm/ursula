@@ -19,7 +19,7 @@ keystone:
     method: socket
 
 barbican:
-  enabled: True
+  enabled: False
 
 neutron:
   enable_external_interface: True

@@ -52,7 +52,7 @@ keystone:
     method: socket
 
 barbican:
-  enabled: True
+  enabled: False
 
 nova:
   libvirt_type: kvm
