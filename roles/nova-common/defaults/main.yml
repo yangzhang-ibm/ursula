@@ -105,6 +105,8 @@ nova:
       - { name: python-memcached }
       - { name: python-ironicclient }
       - { name: uwsgi }
+      #TODO: Remove barbican client in Ocata because it will get installed by Castellan
+      - { name: python-barbicanclient }
     system_dependencies:
       ubuntu:
         - libjs-jquery-tablesorter
