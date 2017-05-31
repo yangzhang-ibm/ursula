@@ -1,7 +1,7 @@
 ---
 client:
   upper_constraints: "{{ openstack_meta.upper_constraints }}"
-  use_constraints: False
+  use_constraints: True
   write_stackrc: True
   self_signed_cert: false
   dep_pkgs:
