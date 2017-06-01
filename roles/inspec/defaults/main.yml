@@ -183,18 +183,11 @@ inspec:
       enabled: true
       profile: openstack_security
       attributes:
-        glance_config_files:
-          - glance_api_audit_map.conf
-          - glance-api-paste.ini
-          - glance-api.conf
-          - glance-cache.conf
-          - glance-glare.conf
-          - glance-registry-paste.ini
-          - glance-registry.conf
-          - glance-scrubber.conf
-          - glance-swift-store.conf
-          - policy.json
-          - schema-image.json
+        glance_config_files: "{{ (ursula_os == 'rhel') | ternary('[\"glance_api_audit_map.conf\",\"glance-api-paste.ini\",
+        \"glance-api.conf\",\"glance-cache.conf\",\"glance-glare.conf\",\"glance-registry-paste.ini\",\"glance-registry.conf\",
+        \"glance-scrubber.conf\",\"glance-swift-store.conf\",\"policy.json\",\"schema-image.json\"]','[\"glance-api.conf\",
+        \"policy.json\",\"glance_api_audit_map.conf\",\"glance-api-paste.ini\",\"glance-registry-paste.ini\",\"glance-registry.conf\",
+        \"glance-swift-store.conf\"]') }}"
       required_controls:
         - check-image-01
         - check-image-02
