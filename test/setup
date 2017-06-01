@@ -8,7 +8,6 @@ if [[ "$CI" == "jenkins" ]]; then
     virtualenv $VENV
     source $VENV/bin/activate
     pip install -U pip
-    pip install --upgrade "setuptools < 36"
     pip install -U -r requirements.txt
 fi
 
