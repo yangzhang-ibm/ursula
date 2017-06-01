@@ -38,7 +38,7 @@ ceph:
     ubuntu: 10.2.3~bbc1
     rhel: 10.2.3
   client_version:
-    ubuntu: 10.2.7-0ubuntu0.16.04.1~cloud0
+    ubuntu: 10.2.*-0ubuntu0.16.04.1~cloud0
     rhel: 10.2.3
 
   openstack_keys:
