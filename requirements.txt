@@ -1,5 +1,6 @@
 tox
 pep8
+six
 oslo.utils
 shade>=1.7.0
 ansible>=2.1.0.0,<3,<=2.1.3
