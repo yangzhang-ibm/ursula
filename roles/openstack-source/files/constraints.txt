@@ -198,12 +198,12 @@ openstackdocstheme===1.5.0
 openstacksdk===0.9.5
 ordereddict===1.1
 os-api-ref===1.0.0
-os-apply-config===0.1.32
+os-apply-config===5.1.0
 os-brick===1.6.2
 os-client-config===1.21.1
 os-cloud-config===5.1.0
-os-collect-config===5.1.0
-os-refresh-config===5.1.0
+os-collect-config===5.2.0
+os-refresh-config===5.2.0
 os-testr===0.8.0
 os-vif===1.2.1
 os-win===1.2.1
@@ -285,11 +285,11 @@ python-dateutil===2.5.3
 python-designateclient===2.3.0
 python-editor===1.0.1
 python-glanceclient===2.5.0
-python-heatclient===1.5.0
+python-heatclient===1.5.1
 python-ironic-inspector-client===1.10.0
 python-ironicclient===1.7.1
 python-k8sclient===0.3.0
-python-karborclient===0.0.9
+python-karborclient===0.1.0
 python-keystoneclient===3.5.1
 python-magnumclient===2.3.1
 python-manilaclient===1.11.0
@@ -299,7 +299,7 @@ python-mistralclient===2.1.2
 python-monascaclient===1.2.0
 python-muranoclient===0.11.1
 python-neutronclient===6.0.0
-python-novaclient===6.0.0
+python-novaclient===6.0.1
 python-openstackclient===3.2.1
 python-pytun===2.2.1
 python-qpid-proton===0.14.0
@@ -374,7 +374,7 @@ thriftpy===0.3.9;python_version=='2.7'
 tooz===1.43.0
 tosca-parser===0.6.0
 traceback2===1.4.0
-tripleo-common===5.4.1
+tripleo-common===5.4.2
 trollius===2.1
 txaio===2.5.1
 tzlocal===1.2.2

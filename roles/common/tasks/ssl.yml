@@ -45,10 +45,15 @@
         owner=root mode=0644
         state=link force=yes
 
+- name: check if certifi exists
+  stat: path="{{ basevenv_lib_dir }}/certifi"
+  register: stat_certifi
+
 - name: force our ssl cert for python libs (certifi)
   file: src={{ ssl.cafile }} dest="{{ basevenv_lib_dir }}/certifi/cacert.pem"
         owner=root mode=0644
         state=link force=yes
+  when: stat_certifi.stat.isdir is defined and stat_certifi.stat.isdir
 
 - name: ssl directory
   file: dest=/opt/stack/ssl state=directory

@@ -88,11 +88,16 @@
           owner=root
           mode=0644 state=link force=yes
 
+  - name: check if certifi exists
+    stat: path=/usr/local/lib/python2.7/dist-packages/certifi
+    register: stat_certifi
+
   - name: fix ssl certs for certifi for keystone-client on trusty
     file: src=/etc/ssl/certs/ca-certificates.crt
           dest=/usr/local/lib/python2.7/dist-packages/certifi/cacert.pem
           owner=root
           mode=0644 state=link force=yes
+    when: stat_certifi.stat.isdir is defined and stat_certifi.stat.isdir
   when: ansible_distribution_version == "14.04"
 
 - name: migrate neutron services script
