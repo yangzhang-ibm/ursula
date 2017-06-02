@@ -193,11 +193,19 @@
   notify: restart sensu-client
 
 - name: ntpd check
-  sensu_process_check: service=ntpd
+  sensu_process_check: service=ntpd state="{{ 'present' if common.ntp.client == 'ntpd' else 'absent' }}"
   notify: restart sensu-client
 
 - name: ntp-offset check
-  sensu_check: name=ntp-offset plugin=check-ntp.rb
+  sensu_check: name=ntp-offset plugin=check-ntp.rb state="{{ 'present' if common.ntp.client == 'ntpd' else 'absent' }}"
+  notify: restart sensu-client
+
+- name: chrony check
+  sensu_process_check: service=chronyd state="{{ 'present' if common.ntp.client == 'chrony' else 'absent' }}"
+  notify: restart sensu-client
+
+- name: chrony-offset check
+  sensu_check: name=chrony-offset plugin=check-chrony.rb state="{{ 'present' if common.ntp.client == 'chrony' else 'absent' }}" use_sudo=true
   notify: restart sensu-client
 
 - name: vmstat metrics check
