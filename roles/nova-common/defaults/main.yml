@@ -97,6 +97,7 @@ nova:
         - "librbd1-{{ ceph.client_version[ursula_os] }}"
         - openstack-selinux
         - openstack-nova-compute
+    python_post_dependencies: []
   source:
     rev: 'stable/newton'
     upper_constraints: '{{ openstack_meta.upper_constraints }}'
@@ -107,6 +108,7 @@ nova:
       - { name: uwsgi }
       #TODO: Remove barbican client in Ocata because it will get installed by Castellan
       - { name: python-barbicanclient }
+      - { name: "git+https://github.com/blueboxgroup/bbc-openstack-plugins.git#egg=bbc_openstack_plugins" }
     system_dependencies:
       ubuntu:
         - libjs-jquery-tablesorter
@@ -194,3 +196,6 @@ nova:
   auditing:
     enabled: False
     logging: False
+  custom_disk_filter:
+    enabled: False
+    reserved_ratio: 0.06
