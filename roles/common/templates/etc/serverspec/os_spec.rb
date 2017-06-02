@@ -36,7 +36,7 @@ describe file('/etc/ssh/sshd_config') do
   it {should contain '^GatewayPorts no'}
   it {should contain '^UsePAM yes'}
   it {should contain '^Ciphers aes128-ctr,aes192-ctr,aes256-ctr'} #OPS092
-  it {should contain '^MACs hmac-sha2-256,hmac-sha2-512,hmac-sha1,hmac-ripemd160' } #OPS093
+  it {should contain '^MACs hmac-sha2-256,hmac-sha2-512' } #OPS093
 end
 
 describe file('/etc/adduser.conf') do
@@ -80,7 +80,7 @@ end
 
 describe file('/etc/shadow') do
   it {should exist}
-  it {should be_mode 600}
+  it {should be_mode 0000}
 end
 
 files = ['backups', 'cache', 'crash', 'lib', 'local',
