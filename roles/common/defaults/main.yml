@@ -19,6 +19,7 @@ common:
        - 2.north-america.pool.ntp.org
        - 3.north-america.pool.ntp.org
     #  - servertime.service.softlayer.com
+    allow_subnets: [] # ['10/8', '172.16/12']
   serial_console:
     enabled: True
     name: ttyS0
