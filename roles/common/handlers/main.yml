@@ -24,6 +24,9 @@
 - name: restart-ntp
   service: name="{{ ntpd_service_name }}" state=restarted
 
+- name: restart-chrony
+  service: name="{{ chrony_service_name }}" state=restarted
+
 - name: load sensors
   shell: /usr/sbin/sensors-detect < /dev/null
 

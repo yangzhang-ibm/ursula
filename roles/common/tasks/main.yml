@@ -113,8 +113,13 @@
   when: ursula_os == 'rhel'
   tags: firewall
 
-- include: ntp.yml
+- include: ntpd.yml
   tags: ntp
+  when: common.ntp.client == 'ntpd'
+
+- include: chrony.yml
+  tags: ntp
+  when: common.ntp.client == 'chrony'
 
 # Include serial console before kernel-tuning to build serial_console_cmdline
 - include: serial-console.yml tty={{ common.serial_console.name }}
