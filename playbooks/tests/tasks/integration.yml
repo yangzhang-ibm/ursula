@@ -211,9 +211,22 @@
   when: cinder.enabled|bool
 
 
-- name: delete resources
+- name: delete instance and keypair
   shell: . /root/stackrc && {{ item }}
   with_items:
     - openstack server delete turtle-stack
     - openstack keypair delete turtle-key
+
+- name: check instance turtle-stack has been deleted
+  shell: . /root/stackrc ;openstack server list
+  args:
+    executable: /bin/bash
+  register: result
+  until: result.stdout.find('turtle-stack')==-1
+  retries: 6
+  delay: 10
+
+- name: delete security group
+  shell: . /root/stackrc && {{ item }}
+  with_items:
     - openstack security group delete turtle-sec
