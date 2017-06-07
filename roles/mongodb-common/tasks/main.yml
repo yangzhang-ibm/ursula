@@ -56,6 +56,19 @@
 - name: start mongodb service
   service: name=mongod state=started enabled=True
 
+- name: Change files in  /var/lib/mongodb folder to group mongodb
+  file:
+    path: "/var/lib/mongodb"
+    group: mongodb
+    recurse: yes
+
+- name: Change permissions of /var/lib/mongodb folder
+  file:
+    path: "/var/lib/mongodb"
+    state: directory
+    group: root
+    mode: 0750
+
 - name: install pymongo for mongodb_user module
   pip: name=pymongo state=present
   register: result
