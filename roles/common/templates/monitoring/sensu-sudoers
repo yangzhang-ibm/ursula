@@ -38,3 +38,4 @@ sensu ALL= NOPASSWD: /etc/sensu/plugins/check-v7k-canister.py
 sensu ALL= NOPASSWD: /etc/sensu/plugins/check-v7k-drive.py
 sensu ALL= NOPASSWD: /etc/sensu/plugins/metrics-v7k.py
 sensu ALL= NOPASSWD: /etc/sensu/plugins/check-chrony.rb
+sensu ALL= NOPASSWD: /etc/sensu/plugins/check-ilmt-lockstate.py
