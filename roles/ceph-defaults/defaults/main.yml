@@ -64,7 +64,6 @@ ceph:
   # Packages
   depend_pkgs:
     - python-pycurl
-    - ntp
     - hdparm
   osd_dep_pkgs:
     - parted
