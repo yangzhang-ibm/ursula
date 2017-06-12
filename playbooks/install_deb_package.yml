@@ -8,7 +8,7 @@
 # ... -e package=tmux
 
 - name: install a deb package
-  hosts: all
+  hosts: all:!vyatta-*
   any_errors_fatal: true
   gather_facts: false
   environment: "{{ env_vars|default({}) }}"
