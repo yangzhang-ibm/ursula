@@ -99,10 +99,6 @@ aodh:
 
 swift:
   enabled: True
-  allow_versions: True
-  swifttool_method: pip
-  swifttool_version: 0.0.2.dev27
-  swifttool_pypi_mirror: https://pypi-mirror.openstack.blueboxgrid.com/bluebox/openstack
   disks:
     - disk: vdb
 
