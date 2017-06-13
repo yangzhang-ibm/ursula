@@ -73,6 +73,10 @@ memcached:
 
 swift:
   enabled: False
+  allow_versions: True
+  swifttool_method: pip
+  swifttool_version: 0.0.2.dev29
+  swifttool_pypi_mirror: https://pypi-mirror.openstack.blueboxgrid.com/bluebox/openstack
   logging:
     debug: False
 
