@@ -154,7 +154,7 @@ inspec:
       enabled: true
       profile: openstack_security
       attributes:
-        horizon_config_group: apache
+        horizon_config_group: "{{ (ursula_os == 'rhel' )| ternary('apache', 'www-data') }}"
       required_controls:
         - check-dashboard-01
         - check-dashboard-02
