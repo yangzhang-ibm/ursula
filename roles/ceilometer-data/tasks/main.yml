@@ -33,6 +33,13 @@
   notify: restart ceilometer data services
   when: openstack_install_method == 'source'
 
+- name: add ceilometer user to libvirt group
+  user:
+    name: ceilometer
+    groups: "{{ ceilometer.libvirt_group[ursula_os] }}"
+    append: yes
+  notify: restart ceilometer data services
+
 - name: trigger restart on upgrades
   debug:
     msg: "Triggering service restart for upgrade"
