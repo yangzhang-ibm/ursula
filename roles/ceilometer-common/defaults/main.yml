@@ -70,3 +70,6 @@ ceilometer:
   auditing:
     enabled: False
     logging: False
+  libvirt_group:
+    ubuntu: libvirtd
+    rhel: libvirt
