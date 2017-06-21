@@ -38,7 +38,7 @@
   - name: SSH password authentication is disabled
     shell: grep 'PasswordAuthentication no' /etc/ssh/sshd_config
 
-  - name: /nonexistant should not exist
+  - name: /nonexistent should not exist
     shell: test ! -e /nonexistent
 
   - name: Upstart should not report any failed services
