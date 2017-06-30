@@ -49,6 +49,9 @@ Type={{ type }}
 {% if notify_access -%}
 NotifyAccess={{ notify_access }}
 {% endif %}
+{% if limit_nofile -%}
+LimitNOFILE={{ limit_nofile }}
+{% endif %}
 {% if user -%}
 User={{ user }}
 {% endif %}
@@ -112,6 +115,7 @@ def main():
             kill_mode=dict(default=None, choices=['control-group', 'process',
                                                   'mixed', 'none']),
             pidfile=dict(default=None),
+            limit_nofile=dict(default=None),
             path=dict(default=None)
         )
     )
