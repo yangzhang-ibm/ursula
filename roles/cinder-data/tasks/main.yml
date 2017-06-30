@@ -25,8 +25,10 @@
       user: "{{ item.user }}"
       cmd: "{{ item.cmd }}"
       config_dirs: "{{ item.config_dirs }}"
+      limit_nofile: "16384 16384"
     with_items:
       - "{{ cinder.services.cinder_volume }}"
+    notify: restart cinder backup service
 
   - name: install cinder backup service (ubuntu)
     upstart_service:
@@ -34,7 +36,9 @@
       user: "{{ item.user }}"
       cmd: "{{ item.cmd }}"
       config_dirs: "{{ item.config_dirs }}"
+      limit_nofile: "16384 16384"
     when: swift.enabled|default("false")|bool
+    notify: restart cinder backup service
     with_items:
       - "{{ cinder.services.cinder_backup }}"
   when: ursula_os == 'ubuntu'
@@ -52,8 +56,10 @@
       config_files: "{{ item.config_files }}"
       restart: "{{ item.restart }}"
       kill_mode: "{{ item.kill_mode }}"
+      limit_nofile: "16384"
     with_items:
       - "{{ cinder.services.cinder_volume }}"
+    notify: restart cinder services
 
   - name: install cinder backup service (rhel)
     systemd_service:
@@ -64,9 +70,11 @@
       cmd: "{{ item.cmd }}"
       config_files: "{{ item.config_files }}"
       restart: "{{ item.restart }}"
+      limit_nofile: "16384"
     when: swift.enabled|default("false")|bool
     with_items:
       - "{{ cinder.services.cinder_backup }}"
+    notify: restart cinder backup service
   when: ursula_os == 'rhel'
 
 - name: trigger restart on upgrades
