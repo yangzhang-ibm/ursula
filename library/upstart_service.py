@@ -47,6 +47,10 @@ end script
 respawn
 {% endif -%}
 
+{% if limit_nofile -%}
+limit nofile {{ limit_nofile }}
+{% endif -%}
+
 exec start-stop-daemon --start --chuid {{ user }} {{ pidfile }} --exec {{ cmd }} {{ args }}
 """
 
@@ -68,6 +72,7 @@ def main():
             prestart_script=dict(default=None),
             respawn=dict(default=True),
             path=dict(default=None),
+            limit_nofile=dict(default=None),
             pidfile=dict(default=None)
         )
     )
