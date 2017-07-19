@@ -15,7 +15,7 @@
   notify: restart sensu-client
   when:
     - not ceph.enabled
-    - cinder.enabled|bool or cinderv2.enabled|bool
+    - cinder.enabled|bool or (cinderv2 is defined and cinderv2.enabled|bool)
 
 - name: qemu crash check
   sensu_check_dict:
