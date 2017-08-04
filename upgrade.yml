@@ -669,4 +669,18 @@
         endpoints:
           db: "{{ undercloud_floating_ip }}:3307"
 
-- include: site.yml
+- hosts: controller
+  gather_facts: no
+  serial: 1
+  tasks:
+  - name: run neutron-reset on controllers
+    shell: /usr/local/bin/neutron-reset
+
+- hosts: compute
+  gather_facts: no
+  tasks:
+  - name: restart the nova-compute service on computes
+    service:
+      name: nova-compute
+      state: restarted
+    when: "'compute' in group_names"
