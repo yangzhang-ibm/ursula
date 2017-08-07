@@ -170,4 +170,4 @@ neutron:
   auditing:
     enabled: False
     logging: False
-  m12_customization: False
+  ml2_customization: False
