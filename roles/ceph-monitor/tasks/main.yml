@@ -131,10 +131,13 @@
     until: result|succeeded
     retries: 5
 
-  - name: add cron to adjust ceph pg number
-    cron: name='ceph-utils' minute='*/{{ ceph.adjust_inveral }}'
-          job='{{ basevenv+"/bin/" if basevenv else "" }}ceph-utils adjust-all'
-          cron_file='ceph_utils' user=root
+# disable ceph-utils cron job, as this is not good for old env which
+# upgraded from 3.0 or less
+#  - name: add cron to adjust ceph pg number
+#    cron: name='ceph-utils' minute='*/{{ ceph.adjust_inveral }}'
+#          job='{{ basevenv+"/bin/" if basevenv else "" }}ceph-utils adjust-all'
+#          cron_file='ceph_utils' user=root
+
   when: ceph.bbg_ceph_utils_pkg
 
 - include: monitoring.yml
