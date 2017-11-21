@@ -99,7 +99,7 @@ nova:
         - openstack-nova-compute
     python_post_dependencies: []
   source:
-    rev: 'stable/newton'
+    rev: 14.0.10
     upper_constraints: '{{ openstack_meta.upper_constraints }}'
     python_dependencies:
       - { name: PyMySQL }

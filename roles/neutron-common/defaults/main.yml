@@ -93,10 +93,10 @@ neutron:
   #     version: 1.58
   #     pip_extra_args: '--extra-index-url https://pypi-mirror.openstack.blueboxgrid.com/root/pypi...'
   source:
-    rev: 'stable/newton'
+    rev: newton-eol
     upper_constraints: '{{ openstack_meta.upper_constraints }}'
     python_dependencies:
-      - { name: "git+git://github.com/openstack/neutron-lbaas.git@stable/newton#egg=neutron-lbaas" }
+      - { name: "git+git://github.com/openstack/neutron-lbaas.git@newton-eol#egg=neutron-lbaas" }
       - { name: PyMySQL }
     python_post_dependencies: []
     system_dependencies:

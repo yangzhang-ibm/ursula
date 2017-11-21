@@ -21,7 +21,7 @@ heat:
     #     pip_extra_args: '--extra-index-url https://pypi-mirror.openstack.blueboxgrid.com/root/pypi...'
     python_post_dependencies: []
   source:
-    rev: 'stable/newton'
+    rev: newton-eol
     upper_constraints: '{{ openstack_meta.upper_constraints }}'
     python_dependencies:
       - { name: PyMySQL }

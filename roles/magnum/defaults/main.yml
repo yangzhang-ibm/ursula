@@ -7,7 +7,7 @@ magnum:
     project_packages:
       - openstack-magnum
   source:
-    rev: 'stable/newton'
+    rev: newton-eol
     upper_constraints: '{{ openstack_meta.upper_constraints }}'
     virtualenv: "/opt/openstack/magnum"
     python_dependencies:

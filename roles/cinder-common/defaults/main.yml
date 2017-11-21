@@ -61,7 +61,7 @@ cinder:
       - openstack-selinux
       - openstack-cinder
   source:
-    rev: 'stable/newton'
+    rev: newton-eol
     upper_constraints: '{{ openstack_meta.upper_constraints }}'
     python_dependencies:
       - { name: PyMySQL }
