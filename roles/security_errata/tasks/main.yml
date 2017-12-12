@@ -21,9 +21,14 @@
 - name: update python modules for true ssl context
   pip: name={{ item }} state=latest
   with_items:
-    - pyopenssl
     - pyasn1
     - ndg-httpsclient
+  register: result
+  until: result|succeeded
+  retries: 5
+
+- name: updating pyopenssl separately to preserve functionality
+  pip: name=pyopenssl version=17.2.0 state=present
   register: result
   until: result|succeeded
   retries: 5
