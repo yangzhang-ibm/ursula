@@ -83,6 +83,27 @@
     wait: true
   register: floating_ip
 
+- name: instance is active
+  shell: . /root/stackrc; openstack server show {{ turtle_stack.openstack.id }} | grep ACTIVE
+  register: result
+  until: result|success
+  retries: 6
+  delay: 10
+
+- name: instance is running
+  shell: . /root/stackrc; openstack server show {{ turtle_stack.openstack.id }} | grep Running
+  register: result
+  until: result|success
+  retries: 6
+  delay: 10
+
+- name: instance ready for login
+  shell: . /root/stackrc; openstack console log show {{ turtle_stack.openstack.id }} | grep "login:"
+  register: result
+  until: result|success
+  retries: 30
+  delay: 10
+
 - name: nova can create a volume via cinder
   environment:
     PYTHONPATH: "{{ basevenv_lib_dir|default(omit) }}"
@@ -118,26 +139,9 @@
     server: turtle-stack
     volume: turtle-vol
   when: cinder.enabled|bool
-
-- name: instance is active
-  shell: . /root/stackrc; openstack server show {{ turtle_stack.openstack.id }} | grep ACTIVE
   register: result
   until: result|success
-  retries: 6
-  delay: 10
-
-- name: instance is running
-  shell: . /root/stackrc; openstack server show {{ turtle_stack.openstack.id }} | grep Running
-  register: result
-  until: result|success
-  retries: 6
-  delay: 10
-
-- name: instance ready for login
-  shell: . /root/stackrc; openstack console log show {{ turtle_stack.openstack.id }} | grep "login:"
-  register: result
-  until: result|success
-  retries: 30
+  retries: 5
   delay: 10
 
 - name: capture instance boot log

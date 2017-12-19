@@ -21,6 +21,7 @@
 - name: update python modules for true ssl context
   pip: name={{ item }} state=latest
   with_items:
+    - pyopenssl==17.2.0
     - pyasn1
     - ndg-httpsclient
   register: result
