@@ -129,6 +129,7 @@ common:
         - libxml2-dev
         - libxslt1-dev
       extra_packages:
+        - pyopenssl==17.2.0
         - python-dateutil
     rhel:
       system_packages:
