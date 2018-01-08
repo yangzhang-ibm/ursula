@@ -32,7 +32,7 @@ apache:
   ssl:
     settings: |
       SSLEngine on
-      SSLProtocol All -SSLv2 -SSLv3
+      SSLProtocol All -SSLv2 -SSLv3 -TLSv1 -TLSv1.1
       SSLHonorCipherOrder On
       SSLCompression off
       # Add six earth month HSTS header for all users...
