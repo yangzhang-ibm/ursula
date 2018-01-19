@@ -1,4 +1,13 @@
 ---
+# depending on package versions in the repos, the openstack-nova* package
+# may install the wrong version of libvirt0 as a dependency. That will
+# cause a failure later when we intall libvirt* package.
+# This runs first to prevent that.
+- name: install proper version of libvirt0
+  package:
+    name: "libvirt0={{ nova.libvirt_bin_version }}"
+  when: project_name == 'nova'
+
 - name: "install {{ project_name }} package"
   apt: pkg="{{ package_name|default(openstack_package.package_name) }}"
        update_cache=yes cache_valid_time=3600
