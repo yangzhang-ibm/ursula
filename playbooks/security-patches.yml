@@ -12,6 +12,7 @@
       - openssl
       - curl
       - libcurl3
+      - libcurl3-gnutls
       - openssh-server
       - apache2
     register: pkgupdate
