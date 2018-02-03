@@ -13,6 +13,7 @@
       - curl
       - libcurl3
       - openssh-server
+      - apache2
     register: pkgupdate
     until: pkgupdate|succeeded
     retries: 5
@@ -27,3 +28,8 @@
       name: ssh
       state: restarted
     when: pkgupdate.changed
+  - name: restart apache
+    service:
+      name: apache2
+      state: restarted
+    when: "pkgupdate.changed and ('controller' in group_names)"
