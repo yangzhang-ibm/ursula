@@ -62,3 +62,11 @@
     - monitoring
     - common
   when: monitoring.enabled|default('True')|bool
+
+- name: fail when TLS 1 or 1.1 are enabled
+  command: openssl s_client -connect localhost:443 -{{ item }}
+  register: result
+  failed_when: result.rc == 0
+  with_items:
+    - tls1
+    - tls1_1
