@@ -41,17 +41,23 @@ heat:
         - /var/log/heat/heat-api.log
       fields:
         type: openstack
-        tags: heat,heat-api
+        tags:
+          - heat
+          - heat-api
     - paths:
         - /var/log/heat/heat-engine.log
       fields:
         type: openstack
-        tags: heat,heat-engine
+        tags:
+          - heat
+          - heat-engine
     - paths:
         - /var/log/heat/heat-manage.log
       fields:
         type: openstack
-        tags: heat,heat-manage
+        tags:
+          - heat
+          - heat-manage
   logging:
     debug: False
     verbose: True

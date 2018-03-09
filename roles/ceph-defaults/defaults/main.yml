@@ -198,12 +198,16 @@ ceph:
         - /var/log/ceph/ceph-osd*.log
       fields:
         type: openstack
-        tags: ceph,ceph-osd
+        tags:
+          - ceph
+          - ceph-osd
     - paths:
         - /var/log/ceph/ceph.audit.log
       fields:
         type: openstack
-        tags: ceph,ceph-audit,archive
+        tags:
+          - ceph
+          - ceph-audit,archive
     - paths:
         - /var/log/ceph/ceph.log
       fields:
@@ -213,7 +217,9 @@ ceph:
         - /var/log/ceph/ceph-mon*.log
       fields:
         type: openstack
-        tags: ceph,ceph-mon
+        tags:
+          - ceph
+          - ceph-mon
 
   monitoring:
     sensu_checks:

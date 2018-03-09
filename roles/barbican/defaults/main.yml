@@ -53,7 +53,9 @@ barbican:
       - /var/log/barbican/api.log
       fields:
         type: openstack
-        tags: barbican,barbican-api
+        tags:
+          - barbican
+          - barbican-api
   backlog: 4096
   max_allowed_secret_in_bytes: 10000
   max_allowed_request_size_in_bytes: 1000000

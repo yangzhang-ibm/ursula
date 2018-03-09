@@ -130,32 +130,44 @@ neutron:
         - /var/log/neutron/neutron-server.log
       fields:
         type: openstack
-        tags: neutron,neutron-server
+        tags:
+          - neutron
+          - neutron-server
     - paths:
         - /var/log/neutron/neutron-dhcp-agent.log
       fields:
         type: openstack
-        tags: neutron,neutron-dhcp-agent
+        tags:
+          - neutron
+          - neutron-dhcp-agent
     - paths:
         - /var/log/neutron/neutron-l3-agent.log
       fields:
         type: openstack
-        tags: neutron,neutron-l3-agent
+        tags:
+          - neutron
+          - neutron-l3-agent
     - paths:
         - /var/log/neutron/neutron-metadata-agent.log
       fields:
         type: openstack
-        tags: neutron,neutron-metadata-agent
+        tags:
+          - neutron
+          - neutron-metadata-agent
     - paths:
         - /var/log/neutron/neutron-lbaasv2-agent.log
       fields:
         type: openstack
-        tags: neutron,neutron-lbaasv2-agent
+        tags:
+          - neutron
+          - neutron-lbaasv2-agent
     - paths:
         - /var/log/neutron/neutron-linuxbridge-agent.log
       fields:
         type: openstack
-        tags: neutron,neutron-linuxbridge-agent
+        tags:
+          - neutron
+          - neutron-linuxbridge-agent
   logging:
     debug: False
     verbose: True

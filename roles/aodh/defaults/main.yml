@@ -37,27 +37,37 @@ aodh:
       - /var/log/aodh/aodh-api.log
       fields:
         type: openstack
-        tags: aodh,aodh-api
+        tags:
+          - aodh
+          - aodh-api
     - paths:
       - /var/log/aodh/aodh-listener.log
       fields:
         type: openstack
-        tags: aodh,aodh-listener
+        tags:
+          - aodh
+          - aodh-listener
     - paths:
       - /var/log/aodh/aodh-notifier.log
       fields:
         type: openstack
-        tags: aodh,aodh-notifier
+        tags:
+          - aodh
+          - aodh-notifier
     - paths:
       - /var/log/aodh/aodh-expirer.log
       fields:
         type: openstack
-        tags: aodh,aodh-expirer
+        tags:
+          - aodh
+          - aodh-expirer
     - paths:
       - /var/log/aodh/aodh-evaluator.log
       fields:
         type: openstack
-        tags: aodh,aodh-evaluator
+        tags:
+          - aodh
+          - aodh-evaluator
   cafile: "{{ ssl.cafile }}"
   alarm_history_time_to_live: 864000
   monitoring:

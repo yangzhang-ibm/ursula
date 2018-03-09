@@ -62,17 +62,23 @@ glance:
         - /var/log/glance/glance-api.log
       fields:
         type: openstack
-        tags: glance,glance-api
+        tags:
+          - glance
+          - glance-api
     - paths:
         - /var/log/glance/glance-manage.log
       fields:
         type: openstack
-        tags: glance,glance-manage
+        tags:
+          - glance
+          - glance-manage
     - paths:
         - /var/log/glance/glance-registry.log
       fields:
         type: openstack
-        tags: glance,glance-registry
+        tags:
+          - glance
+          - glance-registry
   logging:
     debug: False
     verbose: True

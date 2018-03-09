@@ -68,17 +68,23 @@ keystone:
       - /var/log/keystone/keystone-all.log
       fields:
         type: openstack
-        tags: keystone,keystone-all
+        tags:
+          - keystone
+          - keystone-all
     - paths:
         - /var/log/keystone/keystone-manage.log
       fields:
         type: openstack
-        tags: keystone,keystone-manage
+        tags:
+          - keystone
+          - keystone-manage
     - paths:
         - /var/log/keystone/keystone.log
       fields:
         type: openstack
-        tags: keystone,keystone-log
+        tags:
+          - keystone
+          - keystone-log
   logging:
     debug: False
     verbose: True

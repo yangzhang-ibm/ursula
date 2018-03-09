@@ -165,7 +165,9 @@ common:
         - /var/log/audit/audit.log
       fields:
         type: syslog
-        tags: audit,common
+        tags:
+          - audit
+          - common
     - paths:
         - /var/log/sensu/sensu-client.log
       fields:

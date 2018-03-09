@@ -22,12 +22,16 @@ magnum:
       - /var/log/magnum/magnum-api.log
       fields:
         type: openstack
-        tags: magnum,api,api
+        tags:
+          - magnum
+          - api,api
     - paths:
       - /var/log/magnum/magnum-conductor.log
       fields:
         type: openstack
-        tags: magnum,conductor
+        tags:
+          - magnum
+          - conductor
   logging:
     debug: False
     verbose: True
