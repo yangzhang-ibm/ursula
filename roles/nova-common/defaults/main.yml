@@ -142,47 +142,65 @@ nova:
         - /var/log/nova/nova-api.log
       fields:
         type: openstack
-        tags: nova,nova-api
+        tags:
+          - nova
+          - nova-api
     - paths:
         - /var/log/nova/nova-placement-api.log
       fields:
         type: openstack
-        tags: nova,nova-placement-api
+        tags:
+          - nova
+          - nova-placement-api
     - paths:
         - /var/log/nova/nova-compute.log
       fields:
         type: openstack
-        tags: nova,nova-compute
+        tags:
+          - nova
+          - nova-compute
     - paths:
         - /var/log/nova/nova-conductor.log
       fields:
         type: openstack
-        tags: nova,nova-conductor
+        tags:
+          - nova
+          - nova-conductor
     - paths:
         - /var/log/nova/nova-consoleauth.log
       fields:
         type: openstack
-        tags: nova,nova-consoleauth
+        tags:
+          - nova
+          - nova-consoleauth
     - paths:
         - /var/log/nova/nova-manage.log
       fields:
         type: openstack
-        tags: nova,nova-manage
+        tags:
+          - nova
+          - nova-manage
     - paths:
         - /var/log/nova/nova-novncproxy.log
       fields:
         type: openstack
-        tags: nova,novnc
+        tags:
+          - nova
+          - novnc
     - paths:
         - /var/log/nova/nova-scheduler.log
       fields:
         type: openstack
-        tags: nova,nova-scheduler
+        tags:
+          - nova
+          - nova-scheduler
     - paths:
         - /var/log/nova/nova-cert.log
       fields:
         type: openstack
-        tags: nova,nova-cert
+        tags:
+          - nova
+          - nova-cert
   logging:
     debug: False
     verbose: True

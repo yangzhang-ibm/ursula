@@ -39,12 +39,16 @@ ironic:
         - /var/log/ironic/ironic-api.log
       fields:
         type: openstack
-        tags: ironic,ironic-api
+        tags:
+          - ironic
+          - ironic-api
     - paths:
         - /var/log/ironic/ironic-conductor.log
       fields:
         type: openstack
-        tags: ironic,ironic-conductor
+        tags:
+          - ironic
+          - ironic-conductor
   logging:
     debug: False
     verbose: True

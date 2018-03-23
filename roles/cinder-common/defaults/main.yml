@@ -74,27 +74,37 @@ cinder:
       - /var/log/cinder/cinder-api.log
     fields:
       type: openstack
-      tags: cinder,cinder-api
+      tags:
+        - cinder
+        - cinder-api
   - paths:
       - /var/log/cinder/cinder-manage.log
     fields:
       type: openstack
-      tags: cinder,cinder-manage
+      tags:
+        - cinder
+        - cinder-manage
   - paths:
       - /var/log/cinder/cinder-scheduler.log
     fields:
       type: openstack
-      tags: cinder,cinder-scheduler
+      tags:
+        - cinder
+        - cinder-scheduler
   - paths:
       - /var/log/cinder/cinder-volume.log
     fields:
       type: openstack
-      tags: cinder,cinder-volume
+      tags:
+        - cinder
+        - cinder-volume
   - paths:
       - /var/log/upstart/tgt.log
     fields:
       type: openstack
-      tags: cinder,tgt
+      tags:
+        - cinder
+        - tgt
   logging:
     debug: False
     verbose: True

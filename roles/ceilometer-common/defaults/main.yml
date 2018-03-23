@@ -43,22 +43,30 @@ ceilometer:
         - /var/log/ceilometer/*api.log
       fields:
         type: openstack
-        tags: ceilometer,ceilometer-api
+        tags:
+          - ceilometer
+          - ceilometer-api
     - paths:
         - /var/log/ceilometer/*agent-notification.log
       fields:
         type: openstack
-        tags: ceilometer,ceilometer-agent-notification
+        tags:
+          - ceilometer
+          - ceilometer-agent-notification
     - paths:
         - /var/log/ceilometer/*collector.log
       fields:
         type: openstack
-        tags: ceilometer,ceilometer-collector
+        tags:
+          - ceilometer
+          - ceilometer-collector
     - paths:
         - /var/log/ceilometer/*polling.log
       fields:
         type: openstack
-        tags: ceilometer,ceilometer-polling
+        tags:
+          - ceilometer
+          - ceilometer-polling
   logging:
     debug: False
     verbose: True
