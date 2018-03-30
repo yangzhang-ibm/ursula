@@ -58,8 +58,10 @@
 # # This is done with command rather than pip due to a bug where the venv
 # # would get re-created on this task, breaking things badly. pip module
 # # needs to be fixed first.
+# # # specify v4.0.0 because latest will not compile against older libvirts
+# # # see openstack bug # 1753539
 - name: install libvirt-python in package venv (ubuntu)
-  command: "{{ 'nova'|ursula_package_path(openstack_package_version) }}/bin/pip install libvirt-python"
+  command: "{{ 'nova'|ursula_package_path(openstack_package_version) }}/bin/pip install 'libvirt-python==4.0.0'"
   register: lvpout
   changed_when: lvpout.stdout|search("Successfully installed")
   notify: restart nova services
