@@ -26,6 +26,54 @@ required to run `ursula`:
 * libffi-dev
 * libssl-dev
 
+#### Mac OS X specific notes non installing dependencies
+
+If you have already installed python via brew, you'll need to remove it so you can force the devel headers to be installed AND usable by your libraries.
+
+```bash
+brew uninstall python
+```
+
+
+Next, install python and pip if not already installed.
+
+```bash
+brew install --devel --framework python
+pip install -U pip
+```
+
+If you've already attempted or installed libxml2 and/or libxslt unlink and uninstall those first.
+
+```bash
+brew unlink libxml2
+brew unlink libxslt
+brew uninstall libxml2
+brew uninstall libxslt
+```
+
+Now, install libxml2 and force static dependencies to enabled linking to the installed devel headers.
+
+```bash
+brew install --with-python libxml2
+STATIC_DEPS=true sudo pip install -U lxml
+```
+
+Install libxslt and relink the newly installed libraries. As we already forced libxml2 to link the headers libxslt should do so as well without further steps. 
+
+```bash
+brew install --with-python libxslt
+brew link libxml2 --force
+brew link libxslt --force
+```
+
+
+Install the remaining needed libraries.
+
+```bash
+brew install libffi
+brew install openssl
+```
+
 ## Python Environment
 
 We recommend using [virtualenv](http://virtualenv.readthedocs.org/en/latest/) or
@@ -41,15 +89,16 @@ $ source /usr/local/bin/virtualenvwrapper.sh
 $ mkvirtualenv ursula
 ```
 
-Note: If you're using OSX El Capitan, you need to use ```pip install --ignore-installed six virtualenvwrapper``` to get pip to not attempt to uninstall the existing version of six which the system will not allow.
+Note: If you're using OSX El Capitan (version 10.11) or newer, you need to use `pip install --ignore-installed six virtualenvwrapper` to get pip to not attempt to uninstall the existing version of six which the system will not allow.
 
 You will want to add `source /usr/local/bin/virtualenvwrapper.sh` to your shell startup file, changing the path to virtualenvwrapper.sh
-depending on where it was installed by pip.
+depending on where it was installed by pip. For bash users on MaC OS X, use .bash_profile; if, like me, you've moved to Zsh, use .zshrc instead.
 
 ```bash
-echo " " >> .bash_profile (for OSX; .bashrc for various linux flavors)
+echo " " >> .bash_profile
 echo "#sourcing statement for virtualenvwrapper" >> .bash_profile
 echo "source /usr/local/bin/virtualenvwrapper.sh" >> .bash_profile
+
 ```
 
 From now on to work with ursula you can run `$ workon ursula` to
