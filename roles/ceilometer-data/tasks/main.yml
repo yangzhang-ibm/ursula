@@ -24,7 +24,7 @@
   when: ursula_os == 'rhel'
 
 - name: install libvirt-python in package venv
-  command: "{{ 'ceilometer'|ursula_package_path(openstack_package_version) }}/bin/pip install libvirt-python"
+  command: "{{ 'ceilometer'|ursula_package_path(openstack_package_version) }}/bin/pip install 'libvirt-python==4.0.0'"
   notify: restart ceilometer data services
   when: openstack_install_method == 'package'
 
