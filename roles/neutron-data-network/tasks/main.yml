@@ -189,6 +189,13 @@
     - neutron-keepalived-state-change
     - neutron-ns-metadata-proxy
 
+- name: pause for operator to be alerted before Neutron restart
+  pause:
+    prompt: "Heads up: Neutron is about to restart."
+  when: code_has_changed | default(False) | bool and
+        upgrade | default(False) | bool and
+        alert_before_neutron_restart | default(False) | bool
+
 - name: trigger restart on upgrades
   debug:
     msg: "Triggering service restart for upgrade"
