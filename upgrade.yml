@@ -589,6 +589,11 @@
         changed: false
   environment: "{{ env_vars|default({}) }}"
 
+- name: pause for operator to be alerted before Neutron restart
+  pause:
+    prompt: "Heads up: Neutron is about to restart."
+  when: alert_before_neutron_restart | default(False)
+
 - name: restart neutron data service
   hosts: compute:network
   max_fail_percentage: 1
