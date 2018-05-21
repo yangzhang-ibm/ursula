@@ -2,6 +2,13 @@
 #
 # NOTE: this file is included by the prereboot tag, as such it should work not include anything that will break older releases
 #
+- name: update apt index
+  apt: update_cache=yes cache_valid_time="{{ apt_cache_timeout | default(3600) }}"
+  register: result
+  until: result|succeeded
+  retries: 5
+  when: ansible_distribution == "Ubuntu"
+
 - name: Install prerequisites for acquiring crash dumps
   package: name={{ item }}
   with_items:

@@ -24,7 +24,7 @@
   - meta: flush_handlers
 
   - name: update apt index
-    apt: update_cache=yes cache_valid_time=3600
+    apt: update_cache=yes cache_valid_time="{{ apt_cache_timeout | default(3600) }}"
     tags: ['prereboot']
     register: result
     until: result|succeeded

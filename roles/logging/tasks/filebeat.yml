@@ -4,7 +4,7 @@
 
 - name: install filebeat apt
   apt:
-    pkg: "filebeat"
+    pkg: "filebeat=5.4.0"
   register: result
   until: result|success
   retries: 3
