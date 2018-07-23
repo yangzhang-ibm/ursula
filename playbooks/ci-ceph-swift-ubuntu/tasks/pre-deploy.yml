@@ -71,7 +71,6 @@
   - name: add pip
     apt:
       update_cache: yes
-      cache_valid_time: 0
       name: python-pip
     register: result
     until: result|succeeded

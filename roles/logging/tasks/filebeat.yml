@@ -4,7 +4,7 @@
 
 - name: install filebeat apt
   apt:
-    pkg: "filebeat=5.4.0"
+    pkg: "filebeat={{ logging.filebeat_version }}"
   register: result
   until: result|success
   retries: 3

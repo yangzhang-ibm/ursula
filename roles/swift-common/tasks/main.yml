@@ -61,7 +61,7 @@
 - name: pin fabric version
   pip:
     name: fabric
-    version: "1.14.0"
+    version: "{{ swift.fabric_version }}"
     extra_args: "-i {{ openstack.pypi_mirror }} --extra-index-url {{ swift.swifttool_pypi_mirror | default(omit) }}"
     virtualenv: "{{ swifttool_venv|default(omit) }}"
   register: result
