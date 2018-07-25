@@ -62,4 +62,4 @@ if [[ "${INSTALL_METHOD}" == "package" ]]; then
 fi
 test/run deploy ${EXTRA_VARS}
 test/run test
-#test/run rally --extra-vars "build_tag=${BUILD_TAG} workspace=${WORKSPACE}"
+test/run rally --extra-vars "build_tag=${BUILD_TAG} workspace=${WORKSPACE}"

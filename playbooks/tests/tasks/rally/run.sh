@@ -40,10 +40,10 @@ install_rally() {
 CINDER_ENABLED=${CINDER_ENABLED:-False}
 BUILD_TAG=${BUILD_TAG:-master}
 RALLY=rally/bin/rally
-RALLY_INSTALL_URL=https://raw.githubusercontent.com/openstack/rally/master/install_rally.sh
+RALLY_INSTALL_URL=https://raw.githubusercontent.com/blueboxgroup/rally/master/install_rally.sh
 RALLY_FILE=bbc-cloud-validate
 RALLY_TEST_IMAGE="cirros"
-RALLY_TEST_NET_ID=$(nova network-list | awk '/internal/{print $2}')
+RALLY_TEST_NET_ID=$(neutron net-list | awk '/internal/{print $2}')
 RALLY_TEST_VCPU_LIMIT=4
 RALLY_MAX_RETRY=4
 RALLY_RETRY_SLEEP=5
@@ -57,6 +57,7 @@ net_id: ${RALLY_TEST_NET_ID}
 vcpu_limit: ${RALLY_TEST_VCPU_LIMIT}
 EOF
 
+rally/bin/pip install rally-openstack
 ${RALLY} deployment create --fromenv --name=${BUILD_TAG}
 ${RALLY} task start bbc-cloud-validate.yml --task-args-file rally_args.yaml
 if [[ ${CINDER_ENABLED} == "True" ]]; then
