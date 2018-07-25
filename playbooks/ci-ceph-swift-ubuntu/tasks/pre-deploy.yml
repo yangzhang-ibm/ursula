@@ -71,7 +71,6 @@
   - name: add pip
     apt:
       update_cache: yes
-      cache_valid_time: 3600
       name: python-pip
     register: result
     until: result|succeeded
@@ -92,7 +91,7 @@
 
   # don't run this on existing clusters
   - name: Run a full dist-upgrade
-    apt: update_cache=yes cache_valid_time=3600 upgrade=dist
+    apt: update_cache=yes upgrade=dist
     register: result
     until: result|succeeded
     retries: 5

@@ -145,3 +145,4 @@ swift:
         no_auditors: 1
         no_updaters: 1
   venv_dir: '/opt/openstack/current/swift'
+  fabric_version: "1.14.0"

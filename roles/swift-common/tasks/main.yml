@@ -58,6 +58,17 @@
     - setup swifttool alternatives
   when: swift.swifttool_method == 'pip'
 
+- name: pin fabric version
+  pip:
+    name: fabric
+    version: "{{ swift.fabric_version }}"
+    extra_args: "-i {{ openstack.pypi_mirror }} --extra-index-url {{ swift.swifttool_pypi_mirror | default(omit) }}"
+    virtualenv: "{{ swifttool_venv|default(omit) }}"
+  register: result
+  until: result|success
+  retries: 3
+  delay: 10
+
 - name: create swift configuration diectory
   file: dest=/etc/swift state=directory owner=swiftops
         group=swiftops mode=0755
