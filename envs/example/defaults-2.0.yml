@@ -141,7 +141,7 @@ apt_repos:
     repo: https://apt-mirror.openstack.blueboxgrid.com/percona/apt
     key_url: https://apt-mirror.openstack.blueboxgrid.com/keys/percona.key
   rabbitmq:
-    repo: https://apt-mirror.openstack.blueboxgrid.com/rabbitmq/debian
+    repo: https://apt-mirror.openstack.blueboxgrid.com/rabbitmq/
     key_url: https://apt-mirror.openstack.blueboxgrid.com/keys/rabbitmq.key
   cloud_archive:
     repo: https://apt-mirror.openstack.blueboxgrid.com/cloud_archive/ubuntu

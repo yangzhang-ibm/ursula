@@ -4,7 +4,7 @@ dependencies:
     repos:
       - repo: 'deb {{ apt_repos.erlang.repo }} {{ ansible_lsb.codename }} contrib'
         key_url: '{{ apt_repos.erlang.key_url }}'
-      - repo: 'deb {{ apt_repos.rabbitmq.repo }} testing main'
+      - repo: 'deb {{ apt_repos.rabbitmq.repo }} trusty main'
         key_url: '{{ apt_repos.rabbitmq.key_url }}'
     when: ursula_os == 'ubuntu'
   - role: monitoring-common
