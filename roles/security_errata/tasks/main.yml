@@ -6,11 +6,9 @@
   until: result|succeeded
   retries: 5
 
-- name: update SSL
-  package: name={{ item }} state=latest
-  with_items:
-  - libssl1.0.0
-  - openssl
+- name: always update these packages
+  apt: pkg={{ item }} update_cache=yes state=latest
+  with_items: "{{ security.always_update.apt }}"
   when: ansible_distribution == 'Ubuntu'
 
   notify: reload haproxy
