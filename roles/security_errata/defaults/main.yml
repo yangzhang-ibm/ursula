@@ -9,3 +9,6 @@ security:
       - openssh-server
       - openssh-client
       - ntp
+      - curl
+      - libcurl3
+      - libcurl3-gnutls
