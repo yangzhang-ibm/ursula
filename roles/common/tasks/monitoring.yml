@@ -134,6 +134,7 @@
   get_url: url="{{ common.ursula_monitoring.tar_url }}"
            dest="{{ common.ursula_monitoring.path }}/archive/ursula-monitoring-{{ common.ursula_monitoring.tar_version  }}"
            mode=0644
+           force=yes
   when: common.ursula_monitoring.method == 'tar'
 
 - name: untar ursula_monitoring package
@@ -283,6 +284,12 @@
   sensu_check: name=check-ipmi-sensors plugin=check-ipmi-sensors.py
                args="--criticality {{ monitoring.ipmi_checks.criticality }}" use_sudo=True
   when: monitoring.ipmi_checks.enabled|default(False)|bool
+  notify: restart sensu-client
+
+- name: configure check-apt-cache sensu check
+  sensu_check: name=check-apt-cache plugin=check-apt-cache.sh
+               interval={{ common.monitoring.sensu_checks.check_apt_cache.interval }}
+               args="{{ common.monitoring.sensu_checks.check_apt_cache.warning }} {{ common.monitoring.sensu_checks.check_apt_cache.critical }}"
   notify: restart sensu-client
 
 - block:

@@ -1,0 +1,16 @@
+---
+- name: copy apt-get update wrapper script for cron job
+  copy:
+    src: usr/local/bin/apt-get-update.sh
+    dest: /usr/local/bin/apt-get-update.sh
+    owner: root
+    group: root
+    mode: 0755
+
+- name: cron job for hour apt cache updates
+  cron:
+    name: "update apt cache hourly"
+    cron_file: "apt-get-update"
+    special_time: hourly
+    job: "http_proxy={{ env_vars.http_proxy }} /usr/local/bin/apt-get-update.sh && touch /var/lib/apt/update-cache-success"
+    user: root

@@ -212,3 +212,6 @@
   tags:
     - serverspec
   when: serverspec.enabled|default('False')|bool
+
+- include: apt-update-cron.yml
+  tags: ['monitoring']
