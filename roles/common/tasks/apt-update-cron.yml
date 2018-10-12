@@ -12,5 +12,5 @@
     name: "update apt cache hourly"
     cron_file: "apt-get-update"
     special_time: hourly
-    job: "http_proxy={{ env_vars.http_proxy }} /usr/local/bin/apt-get-update.sh && touch /var/lib/apt/update-cache-success"
+    job: "http_proxy={{ ( env_vars | default({})).http_proxy | default(None) }} /usr/local/bin/apt-get-update.sh && touch /var/lib/apt/update-cache-success"
     user: root
