@@ -80,7 +80,7 @@ end
 
 describe file('/etc/shadow') do
   it {should exist}
-  it {should be_mode 0000}
+  it {should be_mode 600}
 end
 
 files = ['backups', 'cache', 'crash', 'lib', 'local',
