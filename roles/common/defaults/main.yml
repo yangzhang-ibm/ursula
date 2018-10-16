@@ -189,6 +189,10 @@ common:
       vyatta:
         tunnels:
           criticality: 'critical'
+      check_apt_cache:
+        interval: 60
+        warning: 24
+        critical: 48
     scan_for_log_errors: False
   os_tuning_params_clean:
     - { name: net.ipv4.tcp_syncookies }

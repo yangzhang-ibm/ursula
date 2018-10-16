@@ -18,7 +18,7 @@
 
 - name: rabbit queues check
   sensu_check: name=rabbitmq-queues plugin=check-rabbitmq-queues.rb
-               args="--timeout {{ rabbitmq.monitoring.sensu_checks.timeout|int }}"
+               args="--timeout {{ rabbitmq.monitoring.sensu_checks.timeout|int }} --ignore Timeout:"
                use_sudo=true
   notify: restart sensu-client
 
