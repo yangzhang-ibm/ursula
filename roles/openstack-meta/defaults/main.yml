@@ -1,6 +1,7 @@
 ---
 openstack_meta:
-  upper_constraints: 'https://file-mirror.openstack.blueboxgrid.com/upper_constraints/newton/upper-constraints.txt'
+  #upper_constraints: 'https://file-mirror.openstack.blueboxgrid.com/upper_constraints/newton/upper-constraints.txt'
+  upper_constraints: 'https://raw.githubusercontent.com/yangzhang-ibm/ursula/yang-magnum-poc/roles/openstack-source/files/constraints.txt'
   keystone:
     services:
       keystone_api:
