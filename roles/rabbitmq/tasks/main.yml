@@ -17,6 +17,7 @@
   - name: install rabbitmq-server (ubuntu)
     package:
       name: rabbitmq-server={{ rabbitmq.version.rabbitmq_server }}
+      force: True
     register: result
     until: result|succeeded
     retries: 5
